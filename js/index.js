@@ -19,5 +19,12 @@ function cadastrarDespesa(){
     let valor = document.getElementById('valor').value;
 
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor);
-    console.log(despesa)
+    
+    gravar(despesa);
 }
+
+function gravar(d){
+    //localstorage salva as informações no navegador
+    //JSON.stringfy() converte objetos para anotaçoes JSON
+    localStorage.setItem('despesa', JSON.stringify(d))
+} 
