@@ -7,6 +7,18 @@ class Despesa{
         this.descricao = descricao
         this.valor = valor
     }
+    // validação de dados
+    validarDados(){
+        //for in - percorre arrays e objetos
+        // somente this referencia a este proprio objeto
+        for(let i in this){
+            //console.log(i, this[i]) // consulta o indice eo valor deste objeto ou array
+            if(this[i] == undefined || this[i] == null || this[i] == '' ){
+                return false;
+            }
+        }
+            return true;;
+    }
 }
 
 class Bd{
@@ -47,6 +59,13 @@ function cadastrarDespesa(){
 
     let despesa = new Despesa(ano, mes, dia, tipo, descricao, valor);
     
-    bd.gravar(despesa);
+    if(despesa.validarDados() === true ){
+       // bd.gravar(despesa)
+        //dialog sucess
+        console.log('Dados válidos');
+    }else{
+       console.log('Dados inválidos');
+    }
+    
 }
 
