@@ -42,8 +42,29 @@ class Bd{
         //localStorage.setItem('despesa', JSON.stringify(d))
         let id = this.getProximoId()
         localStorage.setItem(id, JSON.stringify(d))
-        localStorage.setItem('id', id )
+        localStorage.setItem('id', id );
+
     }
+    recuperarTodosRegistros(){
+        //array de despesas
+        let despesas = Array()
+
+       let id = localStorage.getItem('id')
+        //recupera todas as depesas cadastradas em localstorage
+       for(let i = 1; i<= id; i++){
+            //recuperar a despesaa
+            let despesa = JSON.parse(localStorage.getItem(i))
+            //se existir indices removidos null
+            if(despesa == null){
+                continue //avança/ignora indices null dentro de um laço
+            }
+            despesas.push(despesa)
+            
+            //passa as despesas para o array em forma de objeto literal
+       }
+       return despesas;
+    }
+   
 }
 
 let bd = new Bd()
@@ -85,6 +106,12 @@ function cadastrarDespesa(){
       //JQUERY
         $('#modalRegistraDespesa').modal('show');
     }
+    
+}
+
+function carregaListaDespesa(){
+    let despesa = Array()
+    despesas = bd.recuperarTodosRegistros();
     
 }
 
