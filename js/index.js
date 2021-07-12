@@ -95,6 +95,15 @@ function cadastrarDespesa(){
         document.getElementById('modal_btn').className = 'btn btn-success';
         //JQUERY
         $('#modalRegistraDespesa').modal('show');
+        //recuperando variaveis e zerando valores apos gravar
+        ano.value = ''
+        mes.value = ''
+        dia.value = ''
+        tipo.value = ''
+        descricao.value = ''
+        valor.value = ''
+
+    
     }else{
 
         document.getElementById('modal_titulo').innerHTML = 'Erro na inclusão do registro';
