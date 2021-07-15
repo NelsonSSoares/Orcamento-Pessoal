@@ -58,6 +58,7 @@ class Bd{
             if(despesa == null){
                 continue //avança/ignora indices null dentro de um laço
             }
+            despesa.id = i
             despesas.push(despesa)
             
             //passa as despesas para o array em forma de objeto literal
@@ -97,7 +98,10 @@ class Bd{
 
         return despesasFiltradas;
     }
-   
+
+   remover(id){
+       localStorage.removeItem(id)
+   }
 }
 
 let bd = new Bd()
@@ -191,6 +195,28 @@ function carregaListaDespesa(despesas = Array()){
         linha.insertCell(1).innerHTML = d.tipo
         linha.insertCell(2).innerHTML = d.descricao
         linha.insertCell(3).innerHTML = d.valor
+
+        // criar botão de uxclusão
+        //creatElement cria tag html
+        let btn =  document.createElement("button")
+        //inserindo classe CSS no botão ou Bootstrp
+        btn.className = 'btn btn-danger'
+        //incluindo o fontawesome com tag e class juntas
+        btn.innerHTML = '<i class="fas fa-times"></i>'
+        //adiciando o id do localStorage ao botão
+        btn.id = `id_despesa_${d.id}`
+        //adicionando evento ao clicar no botão
+        btn.onclick = function() {
+            
+            //removendo string do id
+            let id = this.id.replace('id_despesa_', '')
+            //remover depesa
+            bd.remover(id)
+
+            window.location.reload()
+        }
+        //append spwana a tag criada com o createElement
+        linha.insertCell(4).append(btn)
         
     })
 }
